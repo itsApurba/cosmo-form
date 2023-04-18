@@ -79,7 +79,10 @@ function Form(): JSX.Element {
     ]);
   };
 
-  console.log(formData.fields);
+  const handleSaveData = () => {
+    console.log(formData);
+  };
+
   return (
     <VStack
       maxH={"90vh"}
@@ -95,7 +98,12 @@ function Form(): JSX.Element {
     >
       <HStack width={"full"} align={"center"} justify={"space-between"}>
         <Heading size={"md"}>Field name and type</Heading>
-        <Button onClick={handleAddField}>Add Field</Button>
+        <HStack>
+          <Button onClick={handleAddField}>Add Field</Button>
+          <Button colorScheme='twitter' onClick={handleSaveData}>
+            Save Data
+          </Button>
+        </HStack>
       </HStack>
       <hr style={{ width: "100%", margin: "0.5rem 0 0.5rem 0" }} />
       <Box className='style' margin={"auto"} width={"100%"}>
