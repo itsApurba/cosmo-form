@@ -49,7 +49,18 @@ const FormField = ({ field, onChange, onDelete }: Props) => {
 
   return (
     <VStack className='formfi' w={"100%"}>
-      <HStack className='formfi-in' w={"full"} justifyContent={"space-between"}>
+      <HStack
+        className='formfi-in'
+        w={"full"}
+        justifyContent={"space-between"}
+        borderRadius={"md"}
+        transition={"all 0.5s"}
+        _hover={{
+          shadow: "sm",
+          transform: "translateY(-2px)",
+          transition: "all 0.3s",
+        }}
+      >
         <Flex gap={2}>
           <Input
             htmlSize={4}
@@ -77,7 +88,9 @@ const FormField = ({ field, onChange, onDelete }: Props) => {
           {field.type == "object" && (
             <Button onClick={handleAddField}>Add Field</Button>
           )}
-          <Button onClick={onDelete}>Delete</Button>
+          <Button variant={"solid"} colorScheme='red' onClick={onDelete}>
+            Delete
+          </Button>
         </Flex>
       </HStack>
       {field.type === "object" && (

@@ -66,6 +66,7 @@ function Form() {
   console.log(formData);
   return (
     <VStack
+      maxH={"90vh"}
       height={"full"}
       className='center'
       margin={"auto"}
