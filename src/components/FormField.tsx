@@ -2,12 +2,13 @@ import React from "react";
 import { Field } from "./Form";
 import FormFields from "./FormFields";
 import {
-  Box,
   Button,
   Flex,
+  FormLabel,
   HStack,
   Input,
   Select,
+  Switch,
   VStack,
 } from "@chakra-ui/react";
 
@@ -17,7 +18,15 @@ type Props = {
   onDelete: () => void;
 };
 
-const FormField = ({ field, onChange, onDelete }: Props) => {
+/**
+ * Renders a form field component.
+ * @param {object} props - The component props.
+ * @param {object} props.field - The field object to render.
+ * @param {Function} props.onChange - The change handler to be called when the field value changes.
+ * @param {Function} props.onDelete - The delete handler to be called when the field is deleted.
+ * @returns {JSX.Element} The rendered form field.
+ */
+const FormField = ({ field, onChange, onDelete }: Props): JSX.Element => {
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ ...field, name: event.target.value });
   };
@@ -28,7 +37,7 @@ const FormField = ({ field, onChange, onDelete }: Props) => {
       onChange({
         ...field,
         type: newType,
-        nestedFields: [{ name: "AddName", type: "string" }],
+        nestedFields: [{ name: "AddName", type: "string", isRequired: true }],
       });
     } else {
       onChange({ ...field, type: newType, nestedFields: undefined });
@@ -45,6 +54,10 @@ const FormField = ({ field, onChange, onDelete }: Props) => {
     ];
     //@ts-ignore
     onChange({ ...field, nestedFields: newFields });
+  };
+
+  const handleToggleEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ ...field, isRequired: event.target.checked });
   };
 
   return (
@@ -84,7 +97,23 @@ const FormField = ({ field, onChange, onDelete }: Props) => {
             <option value='object'>Object</option>
           </Select>
         </Flex>
-        <Flex gap={2}>
+        <Flex gap={2} align={"center"}>
+          <Flex align={"center"} gap={1}>
+            <FormLabel
+              opacity={"0.5"}
+              fontSize={"xs"}
+              m={0}
+              p={0}
+              htmlFor='isRequired'
+            >
+              Required
+            </FormLabel>
+            <Switch
+              id='isRequired'
+              isChecked={field.isRequired}
+              onChange={handleToggleEvent}
+            />
+          </Flex>
           {field.type == "object" && (
             <Button onClick={handleAddField}>Add Field</Button>
           )}

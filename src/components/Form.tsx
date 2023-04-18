@@ -5,49 +5,62 @@ import { Box, Button, Center, HStack, Heading, VStack } from "@chakra-ui/react";
 export type Field = {
   name: string;
   type: "string" | "number" | "boolean" | "object";
+  isRequired: boolean;
   nestedFields?: Field[];
 };
 
 type MyFormData = {
   fields: Field[];
 };
-
-function Form() {
+/**
+ * This function renders a form with fields that can be dynamically added and removed.
+ *
+ * @return {JSX.Element} The rendered form component
+ */
+function Form(): JSX.Element {
   const [formData, setFormData] = useState<MyFormData>({
     fields: [
       {
         name: "Person",
-        type: "string",
+        type: "object",
+        isRequired: true,
         nestedFields: [
           {
             name: "name",
             type: "string",
+            isRequired: true,
           },
           {
             name: "mobile",
             type: "number",
+            isRequired: false,
           },
           {
             name: "email",
             type: "string",
+            isRequired: true,
           },
         ],
       },
       {
         name: "NewPerson",
         type: "object",
+        isRequired: false,
         nestedFields: [
           {
             name: "Name",
             type: "string",
+            isRequired: true,
           },
           {
             name: "Friends",
             type: "object",
+            isRequired: false,
             nestedFields: [
               {
                 name: "name",
                 type: "string",
+                isRequired: true,
               },
             ],
           },
@@ -60,7 +73,10 @@ function Form() {
   };
   const handleAddField = () => {
     const fields = [...formData.fields];
-    handleFieldsChange([...fields, { name: "addName", type: "string" }]);
+    handleFieldsChange([
+      ...fields,
+      { name: "addName", type: "string", isRequired: true },
+    ]);
   };
 
   console.log(formData);

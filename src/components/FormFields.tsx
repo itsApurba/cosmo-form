@@ -6,10 +6,23 @@ type Props = {
   fields: Field[];
   handleFieldsChange: (newFields: Field[]) => void;
 };
+/**
+ * Renders a form with specified fields.
+ *
+ * @param {Object[]} fields - An array of field objects, each with a name (string), type (string), and isRequired (boolean).
+ * @param {Function} handleFieldsChange - A function that takes in an updated array of fields and updates the state of the parent component.
+ * @returns {JSX.Element} A form with the specified fields.
+ */
 
-const FormFields = ({ fields, handleFieldsChange: onChange }: Props) => {
+const FormFields = ({
+  fields,
+  handleFieldsChange: onChange,
+}: Props): JSX.Element => {
   const handleAddField = () => {
-    onChange([...fields, { name: "addName", type: "string" }]);
+    onChange([
+      ...fields,
+      { name: "addName", type: "string", isRequired: true },
+    ]);
   };
 
   // const handleAddNestedField = () => {
