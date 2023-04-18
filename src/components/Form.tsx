@@ -79,7 +79,7 @@ function Form(): JSX.Element {
     ]);
   };
 
-  // console.log(formData);
+  console.log(formData.fields);
   return (
     <VStack
       maxH={"90vh"}

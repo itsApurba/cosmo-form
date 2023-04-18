@@ -76,7 +76,7 @@ const FormField = ({ field, onChange, onDelete }: Props): JSX.Element => {
       >
         <Flex gap={2}>
           <Input
-            htmlSize={4}
+            htmlSize={10}
             variant={"filled"}
             width={"auto"}
             size={"md"}
