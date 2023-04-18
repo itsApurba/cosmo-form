@@ -98,6 +98,12 @@ const FormField = ({ field, onChange, onDelete }: Props): JSX.Element => {
           </Select>
         </Flex>
         <Flex gap={2} align={"center"}>
+          {field.type == "object" && (
+            <Button onClick={handleAddField}>Add Field</Button>
+          )}
+          <Button variant={"solid"} colorScheme='red' onClick={onDelete}>
+            Delete
+          </Button>
           <Flex align={"center"} gap={1}>
             <FormLabel
               opacity={"0.5"}
@@ -114,12 +120,6 @@ const FormField = ({ field, onChange, onDelete }: Props): JSX.Element => {
               onChange={handleToggleEvent}
             />
           </Flex>
-          {field.type == "object" && (
-            <Button onClick={handleAddField}>Add Field</Button>
-          )}
-          <Button variant={"solid"} colorScheme='red' onClick={onDelete}>
-            Delete
-          </Button>
         </Flex>
       </HStack>
       {field.type === "object" && (
